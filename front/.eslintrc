@@ -1,7 +1,4 @@
 {
-    "extends": [
-        "eslint:recommended",
-        "plugin:prettier/recommended",
-        "plugin:react-hooks/recommended"
-      ]
+  "extends": ["eslint:recommended", "plugin:prettier/recommended", "plugin:react-hooks/recommended"],
+  "ignorePatterns": ["front/*", "front/node_modules/*", "node_modules"]
 }
