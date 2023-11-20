@@ -17,7 +17,9 @@
     "@emotion/core": "^11.0.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@loadable/component": "^5.15.3",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
+    "@types/loadable__component": "^5.13.7",
     "@types/webpack-dev-server": "^4.7.2",
     "axios": "^1.6.1",
     "cross-env": "^7.0.3",
@@ -27,6 +29,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.18.0",
     "style-loader": "^3.3.3",
+    "swr": "^2.2.4",
     "typescript": "^5.2.2",
     "webpack-bundle-analyzer": "^4.9.1",
     "webpack-dev-server": "^4.15.1"
