@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Button, Error, Form, Header, Input, Label, LinkContainer, Success } from './stypes';
 import useInput from '@hooks/useInput';
 import axios from 'axios';
@@ -10,7 +10,8 @@ import fetcherWithParams from '@utils/fetcherWithParams';
 const Login = () => {
   const [email, onChangeEmail, setEmail] = useInput('');
   const [password, onChangePassword, setPassword] = useInput('');
-  const { data, error, mutate } = useSWR('/api/user/login', (url) => fetcherWithParams(url, { email, password }));
+  const [signUpError, setSignUpError] = useState(false);
+  const { data, error, mutate } = useSWR('/api/user/login', (url) => fetcher(url));
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -27,19 +28,16 @@ const Login = () => {
         })
         .catch((error) => {
           console.log(error.response);
-          //setSignUpError(error.response.data);
+          setSignUpError(false);
         });
     },
     [email, password],
   );
-
   if (data) {
-    console.log(data);
-    console.log(location);
-    // navigate('/workspace/channel', {
-    //   state: { from: location },
-    //   replace: true,
-    // });
+    navigate('/workspace/channel', {
+      state: { from: location },
+      replace: true,
+    });
   }
 
   return (
@@ -63,6 +61,7 @@ const Login = () => {
       <LinkContainer>
         아직 회원이 아니신가요? ㄴ<NavLink to="/signup">회원가입 하러가기</NavLink>
       </LinkContainer>
+      {signUpError} && <div>오류</div>
     </div>
   );
 };

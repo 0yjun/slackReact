@@ -1,13 +1,26 @@
+import fetcher from '@utils/fetcher';
 import axios from 'axios';
 import React, { FC, useCallback } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import useSWR from 'swr';
 
 const WorkSpace: FC<React.PropsWithChildren> = ({ children }) => {
+  const { data, error, mutate } = useSWR('/api/user/login', (url) => fetcher(url));
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const onLogout = useCallback((e: any) => {
-    axios.post('api/user/logout', null, {
+    axios.post('/api/user/logout', null, {
       withCredentials: true,
     });
   }, []);
-  console.log(children);
+
+  if (!data) {
+    navigate('/login', {
+      state: { from: location },
+      replace: true,
+    });
+  }
 
   return (
     <div>

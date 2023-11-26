@@ -10,7 +10,7 @@ const App = () => (
   <Routes>
     <Route path="/login" Component={Login} />
     <Route path="/signup" Component={SignUp} />
-    <Route path="/workspace.channel" Component={Channel} />
+    <Route path="/workspace/channel" Component={Channel} />
   </Routes>
 );
 

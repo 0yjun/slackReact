@@ -4,6 +4,7 @@ import webpack, { Configuration as WebpackConfiguration } from 'webpack';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
+import fs from 'fs';
 
 interface Configuration extends WebpackConfiguration {
   devServer?: WebpackDevServerConfiguration;
@@ -81,9 +82,13 @@ const config: Configuration = {
     port: 3000,
     devMiddleware: { publicPath: '/dist/' },
     static: { directory: path.resolve(__dirname) },
+    https: {
+      key: fs.readFileSync(path.resolve(__dirname, 'cert/server.key')),
+      cert: fs.readFileSync(path.resolve(__dirname, 'cert/server.cert')),
+    },
     proxy: {
       '/api/': {
-        target: 'http://localhost:9094',
+        target: 'http://localhost:8080',
         changeOrigin: true,
         ws: true,
       },
